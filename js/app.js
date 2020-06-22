@@ -71,7 +71,7 @@ function isInViewport(el) {
     return (
         top < (offsetTop + innerHeight) &&
         left < (offsetLeft + innerWidth) &&
-        (top + height) > offsetTop &&
+        (top + height) > offsetTop + 100 &&
         (left + width) > offsetLeft
     );
 }
@@ -128,7 +128,7 @@ function SetAciveSectionOnViewport() {
 function SetActiveSection(e) {
     if (e.target.nodeName.toLowerCase() == 'li' || e.target.nodeName.toLowerCase() == 'a') {
         e.preventDefault();
-        var element = document.querySelector(`#${e.target.dataset.section}`);
+        let element = document.querySelector(`#${e.target.dataset.section}`);
         if (element.scrollIntoView == undefined)
             element.scrollIntoViewIfNeeded(true);
         else
@@ -173,7 +173,7 @@ function FixNavMenu() {
         nav.classList.remove('navbar__menu__scroll__stop');
         nav.classList.add('navbar__menu', 'navbar__menu__scroll');
 
-        scrollNavMenuTimer = this.setTimeout(FixNavMenu, 1000);
+        scrollNavMenuTimer = this.setTimeout(FixNavMenu, 3000);
     }
     else {
         nav.classList.remove('navbar__menu__scroll');
@@ -193,7 +193,7 @@ function OnScroll() {
     }
 
     scrollTimer = this.setTimeout(SetAciveSectionOnViewport, 100);
-    scrollNavMenuTimer = this.setTimeout(FixNavMenu, 100);
+    scrollNavMenuTimer = this.setTimeout(FixNavMenu, 300);
 }
 
 // Make collapsible
